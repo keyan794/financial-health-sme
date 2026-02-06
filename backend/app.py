@@ -6,6 +6,10 @@ import os
 app = Flask(__name__)
 CORS(app)
 
+@app.route("/")
+def health():
+    return "SME Financial Health API is running", 200
+
 @app.route("/analyze", methods=["POST"])
 def analyze():
     file = request.files['file']
@@ -36,8 +40,6 @@ def analyze():
         "risk_level": risk,
         "ai_insights": insights
     })
-
-
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
